@@ -80,4 +80,10 @@ public interface NetworkConstants {
 	public static final String PARAM_VOTE = "vote";
 	public static final String PARAM_RANDOM = "random";
 	public static final String PARAM_EMAIL = "email";
+	
+	/** The default connection timeout (ms) */
+	public static final int CONN_TIMEOUT = 2000;
+	
+	/** The default socket timeout (ms) */
+	public static final int SOCK_TIMEOUT = 5000;
 }

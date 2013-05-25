@@ -24,12 +24,16 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 
 import android.accounts.NetworkErrorException;
 
 import com.huskysoft.interviewannihilator.model.Category;
 import com.huskysoft.interviewannihilator.model.Difficulty;
 import com.huskysoft.interviewannihilator.model.NetworkException;
+import com.huskysoft.interviewannihilator.util.NetworkConstants;
 import com.huskysoft.interviewannihilator.util.Utility;
 
 public class NetworkService {
@@ -42,6 +46,11 @@ public class NetworkService {
 
 	private NetworkService() {
 		httpClient = new DefaultHttpClient();
+		HttpParams httpParameters = new BasicHttpParams();
+		HttpConnectionParams.setConnectionTimeout(
+				httpParameters, NetworkConstants.CONN_TIMEOUT);
+		HttpConnectionParams.setSoTimeout(
+				httpParameters, NetworkConstants.SOCK_TIMEOUT);
 	}
 
 	/**
