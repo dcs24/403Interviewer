@@ -180,7 +180,7 @@ public class QuestionActivity extends AbstractPostingActivity {
 					t.setBackground(getResources().
 							getDrawable(R.drawable.listitem));
 					t.setLayoutParams(llp);
-					t.setId(solution.getId());
+					t.setId(solution.getSolutionId());
 					//Hide solutions
 					t.setVisibility(View.GONE);
 					

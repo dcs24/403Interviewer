@@ -13,7 +13,7 @@ import java.util.Date;
 
 public class Solution implements Likeable {
 
-	private int id;
+	private int solutionId;
 	private String text;
 	private int questionId;
 	private int authorId;
@@ -38,8 +38,8 @@ public class Solution implements Likeable {
 		this.text = text;
 	}
 	
-	public int getId() {
-		return id;
+	public int getSolutionId() {
+		return solutionId;
 	}
 	
 	public String getText() {
@@ -66,8 +66,8 @@ public class Solution implements Likeable {
 		return dislikes;
 	}
 	
-	public void setId(int id) {
-		this.id = id;
+	public void setSolutionId(int solutionId) {
+		this.solutionId = solutionId;
 	}
 
 	public void setText(String text) {
@@ -108,7 +108,7 @@ public class Solution implements Likeable {
 		}
 		result = prime * result + i;
 		result = prime * result + dislikes;
-		result = prime * result + id;
+		result = prime * result + solutionId;
 		result = prime * result + likes;
 		result = prime * result + questionId;
 		int j;
@@ -148,7 +148,7 @@ public class Solution implements Likeable {
 		if (dislikes != other.dislikes) {
 			return false;
 		}
-		if (id != other.id) {
+		if (solutionId != other.solutionId) {
 			return false;
 		}
 		if (likes != other.likes) {
@@ -170,9 +170,9 @@ public class Solution implements Likeable {
 
 	@Override
 	public String toString() {
-		return "Solution [id=" + id + ", text=" + text + ", questionId="
-		+ questionId + ", authorId=" + authorId + ", dateCreated="
-		+ dateCreated + ", likes=" + likes + ", dislikes=" + dislikes
-		+ "]";
+		return "Solution [solutionId=" + solutionId + ", text=" + text 
+		+ ", questionId=" + questionId + ", authorId=" + authorId 
+		+ ", dateCreated=" + dateCreated + ", likes=" + likes + ", dislikes=" 
+		+ dislikes + "]";
 	}
 }

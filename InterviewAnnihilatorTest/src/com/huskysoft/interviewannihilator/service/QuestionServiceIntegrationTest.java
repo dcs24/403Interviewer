@@ -161,6 +161,7 @@ public class QuestionServiceIntegrationTest extends TestCase {
 		// create solution
 		Solution sInit = TestHelpers.createDummySolution(qId);
 		int sId = questionService.postSolution(sInit);
+		sInit.setSolutionId(sId);
 		
 		// read
 		PaginatedSolutions results = questionService.getSolutions(qId, 1, 0);
@@ -168,8 +169,7 @@ public class QuestionServiceIntegrationTest extends TestCase {
 		List<Solution> solutionList = results.getSolutions();
 		assertEquals(1, solutionList.size());
 		sInit.setDateCreated(solutionList.get(0).getDateCreated());
-		sInit.setId(sId);
-		assertEquals(sInit.getAuthorId(), solutionList.get(0).getAuthorId());
+		assertEquals(sInit, solutionList.get(0));
 		
 		// delete
 		boolean successDelete = questionService.deleteSolution

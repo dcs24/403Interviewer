@@ -45,7 +45,7 @@ public class SolutionTest extends TestCase {
 		assertEquals(1, testS.getAuthorId());
 		assertEquals("Some solution" + 0, testS.getText());
 		assertEquals(0, testS.getQuestionId());
-		assertEquals(0, testS.getId());
+		assertEquals(0, testS.getSolutionId());
 		assertNotNull(testS.getDateCreated());
 	}
 	
@@ -56,7 +56,7 @@ public class SolutionTest extends TestCase {
 	 */
 	public void testSolutionSetters() {
 		Solution testS = TestHelpers.createDummySolution(0);
-		testS.setId(8);
+		testS.setSolutionId(8);
 		testS.setDateCreated(new Date(8));
 		testS.setAuthorId(8);
 		testS.setQuestionId(8);
@@ -64,7 +64,7 @@ public class SolutionTest extends TestCase {
 		assertEquals(8, testS.getAuthorId());
 		assertEquals("8", testS.getText());
 		assertEquals(8, testS.getQuestionId());
-		assertEquals(8, testS.getId());
+		assertEquals(8, testS.getSolutionId());
 		assertNotNull(testS.getDateCreated());
 	}
 	

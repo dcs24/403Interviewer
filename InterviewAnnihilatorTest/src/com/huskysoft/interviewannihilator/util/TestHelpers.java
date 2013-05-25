@@ -42,7 +42,7 @@ public class TestHelpers {
 		Solution s = new Solution();
 		s.setAuthorId(i + 1);
 		s.setDateCreated(new Date());
-		s.setId(i);
+		s.setSolutionId(i);
 		s.setQuestionId(i);
 		s.setText("Some solution" + i);
 		return s;
