@@ -21,7 +21,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 import com.huskysoft.interviewannihilator.model.Likeable;
-import com.huskysoft.interviewannihilator.model.UserInfo;
 
 public class Utility {
 	
@@ -142,14 +141,5 @@ public class Utility {
 		if (o == null) {
 			throw new IllegalStateException(objectName + " cannot be null!");
 		}
-	}
-	
-	// TODO: Remove this once userEmail is implemented in front end.
-	@Deprecated
-	public static UserInfo createTestUserInfo() {
-		UserInfo userInfo = new UserInfo();
-		userInfo.setUserEmail("admin@huskysoft.com");
-		userInfo.setUserId(0);
-		return userInfo;
 	}
 }
