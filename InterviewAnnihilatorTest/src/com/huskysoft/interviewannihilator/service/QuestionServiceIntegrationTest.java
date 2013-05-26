@@ -63,7 +63,6 @@ public class QuestionServiceIntegrationTest extends TestCase {
 		assertNotNull(questions);
 		assertEquals(Math.min(10, questions.getTotalNumberOfResults()),
 				questions.getQuestions().size());
-		System.out.println(questions);
 	}
 
 	/**
@@ -79,6 +78,27 @@ public class QuestionServiceIntegrationTest extends TestCase {
 		}
 		catch (IllegalArgumentException e) {
 			// expected
+		}
+	}
+	
+	/**
+	 * Test fetching Questions which I authored
+	 * @throws IOException 
+	 * @throws NetworkException 
+	 * 
+	 * @label White-box test
+	 */
+	public void testGetMyQuestions() throws NetworkException, IOException {
+		UserInfo uinfo = TestHelpers.createTestUserInfo();
+		questionService.setUserInfo(uinfo);
+		PaginatedQuestions questions = 
+				questionService.getMyQuestions(null, null, 10, 0, false);
+		assertNotNull(questions);
+		assertTrue(questions.getTotalNumberOfResults() > 0);
+		assertEquals(Math.min(10, questions.getTotalNumberOfResults()),
+				questions.getQuestions().size());
+		for (Question q : questions.getQuestions()) {
+			assertEquals(uinfo.getUserId(), Integer.valueOf(q.getAuthorId()));
 		}
 	}
 
@@ -101,7 +121,6 @@ public class QuestionServiceIntegrationTest extends TestCase {
 		assertNotNull(solutions);
 		assertEquals(Math.min(10, solutions.getTotalNumberOfResults()), 
 				solutions.getSolutions().size());
-		System.out.println(solutions);
 	}
 
 	/**

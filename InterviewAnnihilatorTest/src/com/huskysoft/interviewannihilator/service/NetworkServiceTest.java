@@ -38,7 +38,8 @@ public class NetworkServiceTest extends TestCase {
 	 * @throws NetworkException
 	 */
 	public void testGetAllQuestions() throws NetworkException {
-		assertNotNull(networkService.getQuestions(null, null, 10, 0, false));
+		assertNotNull(networkService.getQuestions(
+				null, null, 10, 0, false, null));
 	}
 
 	/**
@@ -48,7 +49,8 @@ public class NetworkServiceTest extends TestCase {
 	 * @throws NetworkException
 	 */
 	public void testGetQuestionsRandom() throws NetworkException {
-		assertNotNull(networkService.getQuestions(null, null, 10, 0, true));
+		assertNotNull(networkService.getQuestions(
+				null, null, 10, 0, true, null));
 	}
 
 	/**
@@ -60,8 +62,8 @@ public class NetworkServiceTest extends TestCase {
 	public void testGetQuestionsByCategory() throws NetworkException {
 		List<Category> categories = new ArrayList<Category>();
 		categories.add(Category.BRAINTEASER);
-		assertNotNull(networkService.getQuestions
-		(null, categories, 10, 0, false));		
+		assertNotNull(networkService.getQuestions(
+				null, categories, 10, 0, false, null));		
 	}
 
 	/**
@@ -74,8 +76,8 @@ public class NetworkServiceTest extends TestCase {
 		List<Category> categories = new ArrayList<Category>();
 		categories.add(Category.COMPSCI);
 		categories.add(Category.BUSINESS);
-		assertNotNull(networkService.getQuestions
-		(null, categories, 10, 0, false));
+		assertNotNull(networkService.getQuestions(
+				null, categories, 10, 0, false, null));
 	}
 
 	/**
@@ -85,8 +87,8 @@ public class NetworkServiceTest extends TestCase {
 	 * @throws NetworkException
 	 */
 	public void testGetQuestionsByDifficulty() throws NetworkException {
-		assertNotNull(networkService.getQuestions
-		(Difficulty.MEDIUM, null, 5, 0, false));
+		assertNotNull(networkService.getQuestions(
+				Difficulty.MEDIUM, null, 5, 0, false, null));
 	}
 
 	/**
@@ -101,8 +103,8 @@ public class NetworkServiceTest extends TestCase {
 		List<Category> categories = new ArrayList<Category>();
 		categories.add(Category.COMPSCI);
 		categories.add(Category.BUSINESS);
-		assertNotNull(networkService.getQuestions
-		(Difficulty.MEDIUM, categories, 5, 0, false));		
+		assertNotNull(networkService.getQuestions(
+				Difficulty.MEDIUM, categories, 5, 0, false, null));		
 	}
 
 	/**
@@ -113,7 +115,8 @@ public class NetworkServiceTest extends TestCase {
 	 * @throws NetworkException
 	 */
 	public void testGetQuestionsWithOffset() throws NetworkException {
-		assertNotNull(networkService.getQuestions(null, null, 5, 5, false));
+		assertNotNull(networkService.getQuestions(
+				null, null, 5, 5, false, null));
 	}
 
 	/**
