@@ -72,7 +72,7 @@ public class NetworkService {
 	 */
 	public String getQuestions(Difficulty difficulty,
 			Collection<Category> categories, int limit, int offset,
-			boolean random) throws NetworkException {
+			boolean random, Integer authorId) throws NetworkException {
 		StringBuilder urlToSend = new StringBuilder(GET_QUESTIONS_URL + "?");
 		urlToSend.append(Utility.appendParameter
 				(PARAM_LIMIT, String.valueOf(limit)));
@@ -98,7 +98,12 @@ public class NetworkService {
 		if (random) {
 			urlToSend.append(Utility.appendParameter(PARAM_RANDOM, ""));
 		}
-
+		if (authorId != null) {
+			String str = Utility.appendParameter(
+					PARAM_AUTHORID, String.valueOf(authorId));
+			urlToSend.append(str);
+		}
+		
 		// delete the trailing ampersand from the url
 		urlToSend.deleteCharAt(urlToSend.lastIndexOf(AMPERSAND));
 
