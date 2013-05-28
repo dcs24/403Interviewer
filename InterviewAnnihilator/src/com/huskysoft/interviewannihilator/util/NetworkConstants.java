@@ -83,8 +83,8 @@ public interface NetworkConstants {
 	public static final String PARAM_AUTHORID = "authorId";
 	
 	/** The default connection timeout (ms) */
-	public static final int CONN_TIMEOUT = 2000;
+	public static final int CONN_TIMEOUT = 5000;
 	
 	/** The default socket timeout (ms) */
-	public static final int SOCK_TIMEOUT = 5000;
+	public static final int SOCK_TIMEOUT = 8000;
 }

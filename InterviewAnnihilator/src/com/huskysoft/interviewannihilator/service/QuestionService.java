@@ -171,6 +171,7 @@ public class QuestionService {
 	private PaginatedQuestions getQuestions(List<Category> categories,
 			Difficulty difficulty, int limit, int offset, boolean random,
 			Integer authorId) throws NetworkException, IOException {
+		Utility.ensureNotNull(authorId, "Author ID");
 		if (limit < 0 || offset < 0) {
 			throw new IllegalArgumentException(
 					"Invalid limit or offset parameter");
@@ -262,6 +263,7 @@ public class QuestionService {
 				questionId, userInfo.getUserEmail());
 		if (success) {
 			userInfo.clearFavoriteQuestion(questionId);
+			userInfo.novoteQuestion(questionId);
 		}
 		return success;
 	}
@@ -319,7 +321,7 @@ public class QuestionService {
 		}
 		return false;		
 	}
-	
+
 	/**
 	 * The method the front-end calls to receive solutions for a given question
 	 * from the database
