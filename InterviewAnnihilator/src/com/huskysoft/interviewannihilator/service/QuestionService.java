@@ -293,6 +293,7 @@ public class QuestionService {
 	public boolean downvoteQuestion(int questionId) throws NetworkException,
 			IOException {
 		return voteQuestion(questionId, UserInfo.DOWNVOTE.booleanValue());
+
 	}
 	
 	/**
@@ -306,7 +307,7 @@ public class QuestionService {
 	 */
 	private boolean voteQuestion(int questionId, boolean upvote)
 			throws NetworkException, IOException {
-		// requireUserInfo();
+		requireUserInfo();
 		Boolean previousVote = userInfo.getQuestionVote(questionId);
 		// If they have already voted on the question, don't allow them
 		// to vote again
@@ -320,7 +321,7 @@ public class QuestionService {
 		}
 		return false;		
 	}
-
+	
 	/**
 	 * The method the front-end calls to receive solutions for a given question
 	 * from the database
@@ -447,7 +448,7 @@ public class QuestionService {
 	 */
 	private boolean voteSolution(int solutionId, boolean upvote) 
 			throws NetworkException, IOException {
-		// requireUserInfo();
+		requireUserInfo();
 		Boolean previousVote = userInfo.getSolutionVote(solutionId);
 		// If they have already voted on the solution, don't allow them
 		// to vote again

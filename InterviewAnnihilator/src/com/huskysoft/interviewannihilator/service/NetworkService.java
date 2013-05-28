@@ -284,6 +284,8 @@ public class NetworkService {
 	}
 	
 	/**
+	 * Votes on a solution
+	 * 
 	 * @param solutionId the id of the question to be voted on
 	 * @param upvote a bool indicating whether the question is to be upvoted
 	 * @param userEmail the email of the user, for authentication
