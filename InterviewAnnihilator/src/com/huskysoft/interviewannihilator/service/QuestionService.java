@@ -171,7 +171,6 @@ public class QuestionService {
 	private PaginatedQuestions getQuestions(List<Category> categories,
 			Difficulty difficulty, int limit, int offset, boolean random,
 			Integer authorId) throws NetworkException, IOException {
-		Utility.ensureNotNull(authorId, "Author ID");
 		if (limit < 0 || offset < 0) {
 			throw new IllegalArgumentException(
 					"Invalid limit or offset parameter");
