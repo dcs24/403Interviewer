@@ -53,6 +53,14 @@ public interface NetworkConstants {
 	public static final String GET_USERID_URL =
 			BASE_URI + AUTHENTICATION + "getUserId.php";
 	
+	/** The script for voting on a question */
+	public static final String VOTE_QUESTION_URL =
+			BASE_URI + QUESTION + "voteQuestion.php";
+	
+	/** The script for voting on a solution */
+	public static final String VOTE_SOLUTION_URL =
+			BASE_URI + SOLUTION + "voteSolution.php";
+	
 	/**
 	 * If a request for multiple categories happens, this token separates out
 	 * the categories
@@ -69,6 +77,7 @@ public interface NetworkConstants {
 	public static final String PARAM_CATEGORY = "category";
 	public static final String PARAM_QUESTIONID = "questionId";
 	public static final String PARAM_SOLUTIONID = "solutionId";
+	public static final String PARAM_VOTE = "vote";
 	public static final String PARAM_RANDOM = "random";
 	public static final String PARAM_EMAIL = "email";
 }

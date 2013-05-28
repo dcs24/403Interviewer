@@ -237,12 +237,61 @@ public class NetworkService {
 				PARAM_SOLUTIONID, String.valueOf(solutionId)));		
 		// delete the trailing ampersand from the url
 		urlToSend.deleteCharAt(urlToSend.lastIndexOf(AMPERSAND));
+		
 		String solutionIdString = 
 				dispatchPostRequest(urlToSend.toString(), userEmail);
 		int solutionIdDeleted = Integer.valueOf(solutionIdString);
 		return solutionIdDeleted > 0;		
 	}
 
+	/**
+	 * Votes on a question
+	 * 
+	 * @param questionId the id of the question to be voted on
+	 * @param upvote a bool indicating whether the question is to be upvoted
+	 * @param userEmail the email of the user, for authentication
+	 * @return bool indicating whether the vote was successful
+	 * @throws NetworkException
+	 */
+	public boolean voteQuestion(int questionId, boolean upvote,
+			String userEmail) throws NetworkException {
+		StringBuilder urlToSend = new StringBuilder(VOTE_QUESTION_URL + "?");
+		urlToSend.append(Utility.appendParameter(PARAM_QUESTIONID,
+				String.valueOf(questionId)));
+		urlToSend.append(Utility.appendParameter(PARAM_VOTE,
+				Boolean.toString(upvote)));	
+		// delete the trailing ampersand from the url
+		urlToSend.deleteCharAt(urlToSend.lastIndexOf(AMPERSAND));
+		
+		String questionIdString = 
+				dispatchPostRequest(urlToSend.toString(), userEmail);
+		int questionIdVoted = Integer.valueOf(questionIdString);
+		return questionIdVoted > 0;
+	}
+	
+	/**
+	 * @param questionId the id of the question to be voted on
+	 * @param upvote a bool indicating whether the question is to be upvoted
+	 * @param userEmail the email of the user, for authentication
+	 * @return bool indicating whether the vote was successful
+	 * @throws NetworkException
+	 */
+	public boolean voteSolution(int solutionId, boolean upvote,
+			String userEmail) throws NetworkException {
+		StringBuilder urlToSend = new StringBuilder(VOTE_SOLUTION_URL + "?");
+		urlToSend.append(Utility.appendParameter(PARAM_SOLUTIONID,
+				String.valueOf(solutionId)));
+		urlToSend.append(Utility.appendParameter(PARAM_VOTE,
+				Boolean.toString(upvote)));	
+		// delete the trailing ampersand from the url
+		urlToSend.deleteCharAt(urlToSend.lastIndexOf(AMPERSAND));
+		
+		String solutionIdString = 
+				dispatchPostRequest(urlToSend.toString(), userEmail);
+		int solutionIdVoted = Integer.valueOf(solutionIdString);
+		return solutionIdVoted > 0;
+	}
+	
 	/**
 	 * Dispatches a get request to the remote server
 	 * 

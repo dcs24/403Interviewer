@@ -246,32 +246,56 @@ public class QuestionService {
 	 * Upvote a given Question. Returns true if upvote was received by the
 	 * server, otherwise false.
 	 * 
-	 * @param questionId
-	 * @return
+	 * @param questionId the id to be voted on
+	 * @return bool indicating the success of the vote
 	 * @throws NetworkException
 	 * @throws IOException
 	 */
-	public boolean upvoteQuestion(int questionId) {
-		Utility.ensureNotNull(userInfo, "UserInfo");
-		userInfo.upvoteQuestion(questionId);
-		// TODO Auto-generated method stub
-		return false;
+	public boolean upvoteQuestion(int questionId) throws NetworkException,
+			IOException {
+		return voteQuestion(questionId, UserInfo.UPVOTE.booleanValue());
 	}
 
 	/**
 	 * Downvote a given Question. Returns true if downvote was received by the
-	 * server, otherwise false.
+	 * server, false otherwise.
 	 * 
-	 * @param questionId
-	 * @return
+	 * @param questionId the id of the question to be voted on
+	 * @return bool indicating the success of the vote
+	 * @throws NetworkException
+	 * @throws IOException
 	 */
-	public boolean downvoteQuestion(int questionId) {
-		Utility.ensureNotNull(userInfo, "UserInfo");
-		userInfo.downvoteQuestion(questionId);
-		// TODO Auto-generated method stub
-		return false;
+	public boolean downvoteQuestion(int questionId) throws NetworkException,
+			IOException {
+		return voteQuestion(questionId, UserInfo.DOWNVOTE.booleanValue());
 	}
 
+	/**
+	 * Vote on a question
+	 * 
+	 * @param questionId the id of the question to be voted on
+	 * @param upvote whether the question is getting upvoted
+	 * @return whether the vote succeeded
+	 * @throws NetworkException
+	 * @throws IOException
+	 */
+	private boolean voteQuestion(int questionId, boolean upvote)
+			throws NetworkException, IOException {
+		// requireUserInfo();
+		Boolean previousVote = userInfo.getQuestionVote(questionId);
+		// If they have already voted on the question, don't allow them
+		// to vote again
+		if (previousVote == null) {
+			boolean res = networkService.voteQuestion(questionId, 
+					upvote, userInfo.getUserEmail());
+			if (res) {
+				userInfo.downvoteQuestion(questionId);
+			}
+			return res;
+		}
+		return false;		
+	}
+	
 	/**
 	 * The method the front-end calls to receive solutions for a given question
 	 * from the database
@@ -353,40 +377,64 @@ public class QuestionService {
 	 * @return bool indicating whether the deletion succeeded
 	 * @throws NetworkException
 	 */
-	public boolean deleteSolution(int solutionId, String userEmail) 
+	public boolean deleteSolution(int solutionId) 
 			throws NetworkException {
 		Utility.ensureNotNull(userInfo, "UserInfo");
-		return networkService.deleteSolution(solutionId, userEmail);
+		return networkService.deleteSolution(solutionId,
+				userInfo.getUserEmail());
 	}
 
 	/**
 	 * Upvote a given Solution. Returns true if upvote was received by the
 	 * server, otherwise false.
 	 * 
-	 * @param solutionId
-	 * @return
+	 * @param solutionId the id of the solution to be voted on
+	 * @return bool indicating the result of the vote
 	 * @throws NetworkException
 	 * @throws IOException
 	 */
-	public boolean upvoteSolution(int solutionId) {
-		Utility.ensureNotNull(userInfo, "UserInfo");
-		userInfo.upvoteSolution(solutionId);
-		// TODO Auto-generated method stub
-		return false;
+	public boolean upvoteSolution(int solutionId) throws NetworkException,
+			IOException {
+		return voteSolution(solutionId, UserInfo.UPVOTE.booleanValue());
 	}
 
 	/**
 	 * Downvote a given Solution. Returns true if downvote was received by the
 	 * server, otherwise false.
 	 * 
-	 * @param solutionId
-	 * @return
+	 * @param solutionId the id of the solution to be voted on
+	 * @return bool indicating the result of the vote
+	 * @throws NetworkException
+	 * @throws IOException
 	 */
-	public boolean downvoteSolution(int solutionId) {
-		Utility.ensureNotNull(userInfo, "UserInfo");
-		userInfo.downvoteSolution(solutionId);
-		// TODO Auto-generated method stub
-		return false;
+	public boolean downvoteSolution(int solutionId) throws NetworkException, 
+			IOException {
+		return voteSolution(solutionId, UserInfo.DOWNVOTE.booleanValue());
+	}
+	
+	/**
+	 * Votes on a given solution
+	 * @param solutionId the id of the solution to be voted on
+	 * @param upvote whether the vote is a like
+	 * @return whether the vote succeeded
+	 * @throws NetworkException
+	 * @throws IOException
+	 */
+	private boolean voteSolution(int solutionId, boolean upvote) 
+			throws NetworkException, IOException {
+		// requireUserInfo();
+		Boolean previousVote = userInfo.getSolutionVote(solutionId);
+		// If they have already voted on the solution, don't allow them
+		// to vote again
+		if (previousVote == null) {
+			boolean res = networkService.voteSolution(solutionId, 
+					upvote, userInfo.getUserEmail());
+			if (res) {
+				userInfo.downvoteSolution(solutionId);
+			}
+			return res;
+		}
+		return false;		
 	}
 
 	public PaginatedQuestions getFavorites(int limit, int offset) {

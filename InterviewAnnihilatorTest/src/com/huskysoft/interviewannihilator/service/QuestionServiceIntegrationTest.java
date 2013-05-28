@@ -173,7 +173,7 @@ public class QuestionServiceIntegrationTest extends TestCase {
 		
 		// delete
 		boolean successDelete = questionService.deleteSolution
-				(sId, TestHelpers.TEST_USER_EMAIL);
+				(sId);
 		assertTrue(successDelete);
 		results = questionService.getSolutions(qId, 1, 0);
 		assertEquals(0, results.getTotalNumberOfResults());
